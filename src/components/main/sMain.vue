@@ -7,22 +7,29 @@
         </mt-navbar>
         <mt-tab-container v-model="active">
             <mt-tab-container-item id="1">
-                <mt-cell v-for="n in 10" :key="n" title="tab-container 1"></mt-cell>
+                <shop-intro></shop-intro>
             </mt-tab-container-item>
             <mt-tab-container-item id="2">
-                <mt-cell v-for="n in 5" :key="n" title="tab-container 2"></mt-cell>
+                <s-menu></s-menu>
             </mt-tab-container-item>
             <mt-tab-container-item id="3">
-                <mt-cell v-for="n in 7" :key="n" title="tab-container 3"></mt-cell>
+                <shop-intro></shop-intro>
             </mt-tab-container-item>
         </mt-tab-container>
     </div>
 </template>
 
 <script>
+    import shopIntro from './shop/shopIntro'
+    import sMenu from './menu/menu'
+
     export default {
         name: 'sMain',
-        data () {
+        components: {
+            shopIntro,
+            sMenu
+        },
+        data() {
             return {
                 active: '1'
             }
@@ -31,11 +38,21 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss">
     .main {
-        height: calc(100% - 110px)
+        height: calc(100% - 150px)
     }
-    .mint-tab-item-label{
+    .mint-navbar{
+        border-bottom: 1px solid #efefef;
+    }
+    .mint-tab-container {
+        height: calc(100% - 46px);
+        .mint-tab-container-wrap {
+            height: 100%;
+        }
+    }
+
+    .mint-tab-item-label {
         font-size: 14px;
     }
 </style>
