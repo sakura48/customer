@@ -4,9 +4,12 @@
         <s-main></s-main>
         <s-footer></s-footer>
         <!--<router-view/>-->
-        <transition name="fade">
-            <div class="mask" v-show="mask"></div>
-        </transition>
+        <modal :visible="showDish">
+            <dish-detail v-show="showDish"></dish-detail>
+        </modal>
+        <modal :visible="showSet">
+            <set-detail v-show="showSet"></set-detail>
+        </modal>
     </div>
 </template>
 
@@ -14,20 +17,29 @@
     import sFooter from './components/footer/sFooter'
     import sHeader from './components/header/sHeader'
     import sMain from './components/main/sMain'
+    import modal from './components/common/modal'
+    import dishDetail from './components/common/dishDetail'
+    import setDetail from './components/common/setDetail'
 
     export default {
         name: 'App',
         components: {
             sFooter,
             sHeader,
-            sMain
+            sMain,
+            modal,
+            dishDetail,
+            setDetail
         },
         data() {
             return {}
         },
         computed: {
-            mask() {
-                return this.$store.state.mask
+            showDish() {
+                return this.$store.state.showDish
+            },
+            showSet() {
+                return this.$store.state.showSet
             }
         },
         mounted() {
@@ -42,20 +54,5 @@
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-    }
-
-    .mask {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        transition: all 0.4s;
-    }
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-    }
-    .fade-enter, .fade-leave-to {
-        opacity: 0;
     }
 </style>

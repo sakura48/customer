@@ -5,7 +5,7 @@
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="loading"
         infinite-scroll-distance="10">
-        <li class="cell" v-for="item in setList">
+        <li class="cell" v-for="item in setList" @click="showDetail">
             <img src="../../../assets/logo.png" alt="">
             <div class="content">
                 <h4>{{item.name}}</h4>
@@ -34,6 +34,9 @@
             }
         },
         methods: {
+            showDetail() {
+                this.$store.commit('showSet', true)
+            },
             loadMore() {
                 this.loading = true
                 setTimeout(() => {
