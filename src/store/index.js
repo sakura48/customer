@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        mask: false
+        showDish: false,
+        showSet: false
     },
     mutations: {
-        showMask(state, message) {
-            state.mask = message
+        showDish(state, message) {
+            state.showDish = message
+        },
+        showSet(state, message) {
+            state.showSet = message
         }
     }
 })

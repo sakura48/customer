@@ -46,7 +46,7 @@
         },
         methods: {
             showDetail() {
-                this.$store.commit('showMask', true)
+                this.$store.commit('showDish', true)
             },
             loadMore() {
                 this.loading = true
