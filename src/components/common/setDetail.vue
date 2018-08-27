@@ -3,21 +3,20 @@
         <div class="setDetail">
             <transition name="slidedown">
                 <div class="content" v-show="showSet">
-                    <img style="width:40%;display: block;margin-bottom: 10px;" src="../../assets/logo.png" alt="">
+                    <img style="width:40%;display: block;margin-bottom: 10px;" :src="getSet.image_url" alt="">
                     <div class="intro">
                         <h4>套餐介绍</h4>
-                        <div style="margin-top: 10px;font-size: 12px;">好吃又实惠</div>
+                        <div style="margin-top: 10px;font-size: 12px;">{{getSet.cn_description}}</div>
                     </div>
                     <div class="material">
                         <h4>单品组成</h4>
                         <div style="margin-top: 10px">
-                            <span>vue</span>
-                            <span>angular</span>
-                            <span>react</span>
+                            <span class="materials" v-for="item in getSet.dishes">{{item}}</span>
                         </div>
                     </div>
                     <div class="price">110.00</div>
-                    <mt-button type="primary" size="small" @click="add($event)">加入订单</mt-button>
+                    <mt-button v-if="canAdd" type="primary" size="small" @click="add($event)">加入订单</mt-button>
+                    <span v-else class="added">已添加</span>
                     <div class="close" @click="close"></div>
                 </div>
             </transition>
@@ -37,11 +36,24 @@
         computed: {
             showSet() {
                 return this.$store.state.showSet
+            },
+            getSet() {
+                return this.$store.state.currentSet
+            },
+            canAdd() {
+                let canAdd = true
+                let list = this.$store.state.selectedSet
+                list.forEach((val) => {
+                    if (val['id'] === this.getSet['id']) {
+                        canAdd = false
+                    }
+                })
+                return canAdd
             }
         },
         methods: {
             add(event) {
-                console.log(event)
+                this.$store.commit('selectedSet', this.getSet)
             },
             close() {
                 this.$store.commit('showSet', false)
@@ -89,6 +101,16 @@
                 bottom: 20px;
                 background-color: #FFB311;
             }
+            .added{
+                position: absolute;
+                bottom:20px;
+                right:20px;
+                width:80px;
+                height:33px;
+                line-height: 33px;
+                text-align: center;
+                display: inline-block;
+            }
             .close {
                 position: absolute;
                 left: 0;
@@ -101,7 +123,7 @@
                 background-size: 100% 100%;
             }
         }
-        span {
+        .materials {
             padding: 2px 6px;
             border-radius: 1000px;
             color: #a9a9a9;

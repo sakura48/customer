@@ -1,14 +1,11 @@
 <template>
     <ul
         style="background-color: white;"
-        class="dishList"
-        v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="loading"
-        infinite-scroll-distance="10">
-        <li class="cell" v-for="item in dishList" @click="showDetail">
-            <img src="../../../assets/logo.png" alt="">
+        class="dishList">
+        <li class="cell" v-for="item in dishList" @click="showDetail(item)">
+            <img :src="item.image_url" alt="">
             <div class="content">
-                <h4>{{item.name}}</h4>
+                <h4>{{item.cn_name}}</h4>
                 <h6>
                     <span>味道好</span><span>分量足</span>
                 </h6>
@@ -45,19 +42,20 @@
             }
         },
         methods: {
-            showDetail() {
+            showDetail(dish) {
+                this.$store.commit('currentDish', dish)
                 this.$store.commit('showDish', true)
             },
-            loadMore() {
-                this.loading = true
-                setTimeout(() => {
-                    let last = this.list[this.list.length - 1]
-                    for (let i = 1; i <= 10; i++) {
-                        this.list.push(last + i)
-                    }
-                    this.loading = false
-                }, 2500)
-            }
+            // loadMore() {
+            //     this.loading = true
+            //     setTimeout(() => {
+            //         let last = this.list[this.list.length - 1]
+            //         for (let i = 1; i <= 10; i++) {
+            //             this.list.push(last + i)
+            //         }
+            //         this.loading = false
+            //     }, 2500)
+            // }
         }
     }
 </script>

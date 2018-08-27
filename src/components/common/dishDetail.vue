@@ -2,21 +2,20 @@
     <div class="dishDetail">
         <transition name="slidedown">
             <div class="content" v-show="showDish">
-                <img style="width:40%;display: block;margin-bottom: 10px;" src="../../assets/logo.png" alt="">
+                <img style="width:40%;display: block;margin-bottom: 10px;" :src="getDish.image_url" alt="">
                 <div class="intro">
                     <h4>单品介绍</h4>
-                    <div style="margin-top: 10px;font-size: 12px;">好吃又实惠</div>
+                    <div style="margin-top: 10px;font-size: 12px;">{{getDish.cn_name}}</div>
                 </div>
                 <div class="material">
                     <h4>使用材料</h4>
                     <div style="margin-top: 10px">
-                        <span>aaa</span>
-                        <span>bbb</span>
-                        <span>ccc</span>
+                        <span class="materials" v-for="item in getDish.cn_materials">{{item}}</span>
                     </div>
                 </div>
-                <div class="price">110.00</div>
-                <mt-button type="primary" size="small" @click="add($event)">加入订单</mt-button>
+                <div class="price">价格待定</div>
+                <mt-button v-if="canAdd" type="primary" size="small" @click="add($event)">加入订单</mt-button>
+                <span v-else class="added">已添加</span>
                 <div class="close" @click="close"></div>
             </div>
         </transition>
@@ -44,11 +43,25 @@
         computed: {
             showDish() {
                 return this.$store.state.showDish
+            },
+            getDish() {
+                return this.$store.state.currentDish
+            },
+            canAdd() {
+                let canAdd = true
+                let list = this.$store.state.selectedDish
+                list.forEach((val) => {
+                    if (val['id'] === this.getDish['id']) {
+                        canAdd = false
+                    }
+                })
+                return canAdd
             }
         },
         methods: {
             add(event) {
-
+                console.log(111)
+                this.$store.commit('selectedDish', this.getDish)
             },
             close() {
                 this.$store.commit('showDish', false)
@@ -104,6 +117,16 @@
                 bottom: 20px;
                 background-color: #FFB311;
             }
+            .added{
+                position: absolute;
+                bottom:20px;
+                right:20px;
+                width:80px;
+                height:33px;
+                line-height: 33px;
+                text-align: center;
+                display: inline-block;
+            }
             .close {
                 position: absolute;
                 left: 0;
@@ -116,7 +139,7 @@
                 background-size: 100% 100%;
             }
         }
-        span {
+        .materials {
             padding: 2px 6px;
             border-radius: 1000px;
             color: #a9a9a9;

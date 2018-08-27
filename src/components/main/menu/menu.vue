@@ -26,24 +26,27 @@
                 index: 1,
                 dishList: [
                     {
-                        name: 'VUE单品',
+                        id: '1',
+                        cn_name: 'VUE单品',
                         code: '000xxx1',
-                        image_urls: ['../../../assets/logo.png', '../../../assets/logo.png']
+                        image_url: '../../../assets/logo.png'
                     },
                     {
-                        name: 'VUE单品',
+                        id: '2',
+                        cn_name: 'VUE单品',
                         code: '000xxx1',
-                        image_urls: ['../../../assets/logo.png', '../../../assets/logo.png']
+                        image_url: '../../../assets/logo.png'
                     },
                     {
-                        name: 'VUE单品',
+                        id: '3',
+                        cn_name: 'VUE单品',
                         code: '000xxx1',
-                        image_urls: ['../../../assets/logo.png', '../../../assets/logo.png']
+                        image_url: '../../../assets/logo.png'
                     }
                 ],
                 setList: [
                     {
-                        id: '套餐的id',
+                        id: '1',
                         name: 'VUE套餐',
                         code: '000xxx1',
                         tags: ['西红柿', '鸡蛋'],

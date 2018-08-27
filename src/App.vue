@@ -42,8 +42,35 @@
                 return this.$store.state.showSet
             }
         },
+        methods: {
+            getShopIntro() {
+                let time = new Date().getTime().toString()
+                this.$ajax.get(`/web/shop/get?id=1&t=${time}`, this).then((res) => {
+                    this.$store.commit('dishList', res)
+                }).catch((err) => {
+                    this.$message.error(err)
+                })
+            },
+            getDishList() {
+                let time = new Date().getTime().toString()
+                this.$ajax.get(`/web/dish/all?shop_id=1&t=${time}`, this).then((res) => {
+                    this.$store.commit('dishList', res)
+                }).catch((err) => {
+                    this.$message.error(err)
+                })
+            },
+            getSetList() {
+                let time = new Date().getTime().toString()
+                this.$ajax.get(`/web/set/all?shop_id=1&t=${time}`, this).then((res) => {
+                    this.$store.commit('setList', res)
+                }).catch((err) => {
+                    this.$message.error(err)
+                })
+            }
+        },
         mounted() {
-            console.log(parseInt('1231fsf'))
+            this.getDishList()
+            this.getSetList()
         }
     }
 </script>
