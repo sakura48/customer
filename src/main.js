@@ -6,10 +6,12 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import router from './router'
 import store from './store'
+import http from './api'
 
 Vue.use(MintUI)
-Vue.config.productionTip = false
 
+Vue.config.productionTip = false
+Vue.prototype.$ajax = http
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

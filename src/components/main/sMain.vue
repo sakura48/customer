@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <mt-navbar v-model="active">
+        <mt-navbar v-model="active" style="margin-top: 10px;">
             <mt-tab-item id="1">店铺</mt-tab-item>
             <mt-tab-item id="2">菜单</mt-tab-item>
             <mt-tab-item id="3">评价</mt-tab-item>
@@ -13,7 +13,7 @@
                 <s-menu></s-menu>
             </mt-tab-container-item>
             <mt-tab-container-item id="3">
-                <shop-intro></shop-intro>
+                <comment></comment>
             </mt-tab-container-item>
         </mt-tab-container>
     </div>
@@ -22,12 +22,14 @@
 <script>
     import shopIntro from './shop/shopIntro'
     import sMenu from './menu/menu'
+    import comment from './comment/comment'
 
     export default {
         name: 'sMain',
         components: {
             shopIntro,
-            sMenu
+            sMenu,
+            comment
         },
         data() {
             return {
@@ -40,13 +42,15 @@
 
 <style lang="scss">
     .main {
-        height: calc(100% - 150px)
+        height: calc(100% - 160px)
     }
-    .mint-navbar{
+
+    .mint-navbar {
         border-bottom: 1px solid #efefef;
     }
+
     .mint-tab-container {
-        height: calc(100% - 46px);
+        height: calc(100% - 56px);
         .mint-tab-container-wrap {
             height: 100%;
         }

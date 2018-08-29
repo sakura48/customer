@@ -3,7 +3,13 @@
         <div class="setDetail">
             <transition name="slidedown">
                 <div class="content" v-show="showSet">
-                    <img style="width:40%;display: block;margin-bottom: 10px;" :src="getSet.image_url" alt="">
+                    <div class="clearfix">
+                        <img style="width:40%;display: block;margin-bottom: 10px; float: left;"
+                             :src="getSet.image_url"
+                             alt="">
+                        <h4 style="margin-left: 15px; margin-top:30px; float:left;">{{getSet.cn_name}}</h4>
+                        <number-picker v-model="count"></number-picker>
+                    </div>
                     <div class="intro">
                         <h4>套餐介绍</h4>
                         <div style="margin-top: 10px;font-size: 12px;">{{getSet.cn_description}}</div>
@@ -14,7 +20,7 @@
                             <span class="materials" v-for="item in getSet.dishes">{{item}}</span>
                         </div>
                     </div>
-                    <div class="price">110.00</div>
+                    <div class="price">价格待定</div>
                     <mt-button v-if="canAdd" type="primary" size="small" @click="add($event)">加入订单</mt-button>
                     <span v-else class="added">已添加</span>
                     <div class="close" @click="close"></div>
@@ -25,12 +31,22 @@
 </template>
 
 <script>
+    import numberPicker from './numberPicker'
+
     export default {
         name: 'setDetail',
         props: {
             type: Object,
             default: function () {
                 return {}
+            }
+        },
+        components: {
+            numberPicker
+        },
+        data() {
+            return {
+                count: 1
             }
         },
         computed: {
@@ -41,19 +57,24 @@
                 return this.$store.state.currentSet
             },
             canAdd() {
-                let canAdd = true
+                let add = true
                 let list = this.$store.state.selectedSet
+                console.log(list)
                 list.forEach((val) => {
                     if (val['id'] === this.getSet['id']) {
-                        canAdd = false
+                        add = false
                     }
                 })
-                return canAdd
+                return add
             }
         },
         methods: {
             add(event) {
-                this.$store.commit('selectedSet', this.getSet)
+                console.log(this.getSet)
+                let set = Object.assign(this.getSet, {
+                    count: this.count
+                })
+                this.$store.commit('selectedSet', set)
             },
             close() {
                 this.$store.commit('showSet', false)
@@ -63,6 +84,19 @@
 </script>
 
 <style lang="scss" scoped>
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .number-picker {
+        width: 150px;
+        margin-left: 10px;
+        margin-top: 20px;
+        float: left;
+    }
+
     .setDetail {
         position: absolute;
         top: 0;
@@ -77,7 +111,7 @@
             position: relative;
             width: 80%;
             min-height: 50%;
-            padding: 0 10px;
+            padding: 10px;
             border-radius: 10px;
             background-color: white;
             .intro {
@@ -101,12 +135,12 @@
                 bottom: 20px;
                 background-color: #FFB311;
             }
-            .added{
+            .added {
                 position: absolute;
-                bottom:20px;
-                right:20px;
-                width:80px;
-                height:33px;
+                bottom: 20px;
+                right: 20px;
+                width: 80px;
+                height: 33px;
                 line-height: 33px;
                 text-align: center;
                 display: inline-block;
@@ -137,7 +171,7 @@
         transform: scale(0);
     }
 
-    .slidedown-enter-active,.slidedown-leave-active {
+    .slidedown-enter-active, .slidedown-leave-active {
         transition: all 0.3s ease;
     }
 </style>

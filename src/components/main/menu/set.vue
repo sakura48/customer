@@ -1,14 +1,11 @@
 <template>
     <ul
         style="background-color: white;"
-        class="setList"
-        v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="loading"
-        infinite-scroll-distance="10">
-        <li class="cell" v-for="item in setList" @click="showDetail(set)">
-            <img src="../../../assets/logo.png" alt="">
+        class="setList">
+        <li class="cell" v-for="item in setList" @click="showDetail(item)">
+            <img :src="item.image_url" alt="">
             <div class="content">
-                <h4>{{item.name}}</h4>
+                <h4>{{item.cn_name}}</h4>
                 <h6>
                     <span>味道好</span><span>分量足</span>
                 </h6>
@@ -25,12 +22,9 @@
                 loading: false
             }
         },
-        props: {
-            setList: {
-                type: Array,
-                default: function () {
-                    return {}
-                }
+        computed: {
+            setList() {
+                return this.$store.state.setList
             }
         },
         methods: {

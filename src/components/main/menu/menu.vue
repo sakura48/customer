@@ -24,36 +24,8 @@
         data() {
             return {
                 index: 1,
-                dishList: [
-                    {
-                        id: '1',
-                        cn_name: 'VUE单品',
-                        code: '000xxx1',
-                        image_url: '../../../assets/logo.png'
-                    },
-                    {
-                        id: '2',
-                        cn_name: 'VUE单品',
-                        code: '000xxx1',
-                        image_url: '../../../assets/logo.png'
-                    },
-                    {
-                        id: '3',
-                        cn_name: 'VUE单品',
-                        code: '000xxx1',
-                        image_url: '../../../assets/logo.png'
-                    }
-                ],
-                setList: [
-                    {
-                        id: '1',
-                        name: 'VUE套餐',
-                        code: '000xxx1',
-                        tags: ['西红柿', '鸡蛋'],
-                        dishes: ['单品1id', '单品2id'],
-                        image_urls: ['url1', 'url2']
-                    }
-                ]
+                dishList: [],
+                setList: []
             }
         },
         methods: {}

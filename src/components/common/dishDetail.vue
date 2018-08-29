@@ -2,10 +2,16 @@
     <div class="dishDetail">
         <transition name="slidedown">
             <div class="content" v-show="showDish">
-                <img style="width:40%;display: block;margin-bottom: 10px;" :src="getDish.image_url" alt="">
+                <div class="clearfix">
+                    <img style="width:40%;display: block;margin-bottom: 10px; float: left;" :src="getDish.image_url"
+                         alt="">
+                    <h4 style="margin-left: 15px; margin-top:30px; float:left;">{{getDish.cn_name}}</h4>
+                    <number-picker v-model="count"></number-picker>
+                </div>
+
                 <div class="intro">
                     <h4>单品介绍</h4>
-                    <div style="margin-top: 10px;font-size: 12px;">{{getDish.cn_name}}</div>
+                    <div style="margin-top: 10px;font-size: 12px;">{{getDish.cn_description}}</div>
                 </div>
                 <div class="material">
                     <h4>使用材料</h4>
@@ -23,15 +29,17 @@
 </template>
 
 <script>
+    import numberPicker from './numberPicker'
+
     export default {
         name: 'dishDetail',
+        components: {
+            numberPicker
+        },
         data() {
             return {
                 addOne: false,
-                circle: {
-                    x: 0,
-                    y: 0
-                }
+                count: 1
             }
         },
         props: {
@@ -48,22 +56,27 @@
                 return this.$store.state.currentDish
             },
             canAdd() {
-                let canAdd = true
+                let add = true
                 let list = this.$store.state.selectedDish
                 list.forEach((val) => {
                     if (val['id'] === this.getDish['id']) {
-                        canAdd = false
+                        add = false
                     }
                 })
-                return canAdd
+                return add
             }
         },
         methods: {
             add(event) {
                 console.log(111)
-                this.$store.commit('selectedDish', this.getDish)
+                let dish = Object.assign(this.getDish, {
+                    count: this.count
+                })
+                console.log(dish)
+                this.$store.commit('selectedDish', dish)
             },
             close() {
+                this.count = 1
                 this.$store.commit('showDish', false)
             }
         }
@@ -71,6 +84,19 @@
 </script>
 
 <style lang="scss" scoped>
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .number-picker {
+        width: 150px;
+        margin-left: 10px;
+        margin-top: 20px;
+        float: left;
+    }
+
     .circle {
         position: fixed;
         width: 20px;
@@ -93,7 +119,7 @@
             position: relative;
             width: 80%;
             min-height: 50%;
-            padding: 0 10px;
+            padding: 10px;
             border-radius: 10px;
             background-color: white;
             .intro {
@@ -117,12 +143,12 @@
                 bottom: 20px;
                 background-color: #FFB311;
             }
-            .added{
+            .added {
                 position: absolute;
-                bottom:20px;
-                right:20px;
-                width:80px;
-                height:33px;
+                bottom: 20px;
+                right: 20px;
+                width: 80px;
+                height: 33px;
                 line-height: 33px;
                 text-align: center;
                 display: inline-block;

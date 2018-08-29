@@ -1,7 +1,7 @@
 <template>
     <div class="number-picker">
         <div class="minus" @click="minus">-</div>
-        <div class="number">{{value}}</div>
+        <span class="number">{{value}}</span>
         <div class="plus" @click="plus">+</div>
     </div>
 </template>
@@ -17,7 +17,9 @@
 
         methods: {
             minus() {
-                this.$emit('input', this.value - 1) // 这儿必须用input 发送数据，发送的数据会被父级v-model=“test”接受到，再被value=test传回来。
+                if (this.value > 1) {
+                    this.$emit('input', this.value - 1)
+                }
             },
             plus() {
                 this.$emit('input', this.value + 1)
@@ -28,12 +30,26 @@
 </script>
 
 <style lang="scss" scoped>
-
-    .minus, .plus {
-        width: 10px;
-        height: 10px;
-        line-height: 10px;
+    .number-picker {
         text-align: center;
-        border-radius: 50%;
+        line-height: 30px;
+        .minus {
+            float: left;
+        }
+        .plus {
+            float: right;
+            background-color: #FFB311;
+        }
+        .minus, .plus {
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid #dcdcdc;
+        }
     }
+
 </style>

@@ -33,19 +33,16 @@
                 loading: false
             }
         },
-        props: {
-            dishList: {
-                type: Array,
-                default: function () {
-                    return {}
-                }
+        computed: {
+            dishList() {
+                return this.$store.state.dishList
             }
         },
         methods: {
             showDetail(dish) {
                 this.$store.commit('currentDish', dish)
                 this.$store.commit('showDish', true)
-            },
+            }
             // loadMore() {
             //     this.loading = true
             //     setTimeout(() => {
