@@ -4,7 +4,7 @@
             <li :class="index === 1 ? 'active' : ''" @click="index = 1">单品</li>
             <li :class="index === 2 ? 'active' : ''" @click="index = 2">套餐</li>
         </ul>
-        <div style="width:75%">
+        <div style="width:75%;height:100%;overflow: scroll;">
             <dish v-show="index === 1" :dishList="dishList"></dish>
             <set v-show="index === 2" :setList="setList"></set>
         </div>

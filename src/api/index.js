@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Indicator } from 'mint-ui'
 
-const urlconfig = ''
+axios.defaults.baseURL = 'http://192.168.6.160:805'
 const config = {
     headers: {
         'Content-type': 'application/json'
@@ -11,7 +11,7 @@ export default {
     get(url) {
         Indicator.open()
         return new Promise((resolve, reject) => {
-            axios.get(urlconfig + url).then((res) => {
+            axios.get(url).then((res) => {
                 if (res['data']['code'] === 0) {
                     console.log(res['data']['data'])
                     reject(res['data']['msg'])
@@ -33,7 +33,7 @@ export default {
         console.log(params)
         Indicator.open('加载中...')
         return new Promise((resolve, reject) => {
-            axios.post(urlconfig + url, params, config).then((res) => {
+            axios.post(url, params, config).then((res) => {
                 console.log(res['data']['data'])
                 if (res['data']['code'] === 0) {
                     reject(res['data']['msg'])

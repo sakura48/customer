@@ -59,7 +59,7 @@
                     dishes: this.getDishes,
                     sets: this.getSets
                 }
-                this.$ajax.post('/h5/customer/order/submit', params).then((res) => {
+                this.$ajax.post('/h5/customer/order/submit', JSON.stringify(params)).then((res) => {
                     this.success = true
                 }).catch((err) => {
                     this.$message.error(err)

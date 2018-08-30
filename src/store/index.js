@@ -35,6 +35,27 @@ export default new Vuex.Store({
                 cn_description: '单品描述',
                 code: '000xxx1',
                 image_url: 'https://www.falcom.co.jp/sen4/assets/common/share/tw.png'
+            },
+            {
+                id: '3',
+                cn_name: 'VUE单品',
+                cn_description: '单品描述',
+                code: '000xxx1',
+                image_url: 'https://www.falcom.co.jp/sen4/assets/common/share/tw.png'
+            },
+            {
+                id: '3',
+                cn_name: 'VUE单品',
+                cn_description: '单品描述',
+                code: '000xxx1',
+                image_url: 'https://www.falcom.co.jp/sen4/assets/common/share/tw.png'
+            },
+            {
+                id: '3',
+                cn_name: 'VUE单品',
+                cn_description: '单品描述',
+                code: '000xxx1',
+                image_url: 'https://www.falcom.co.jp/sen4/assets/common/share/tw.png'
             }
         ],
         setList: [
@@ -62,6 +83,9 @@ export default new Vuex.Store({
         },
         showOrder(state, message) {
             state.showOrder = message
+        },
+        shopIntro(state, message) {
+            state.shopIntro = message
         },
         dishList(state, message) {
             state.dishList = message

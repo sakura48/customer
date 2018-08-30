@@ -86,6 +86,9 @@
             Indicator.open()
             Promise.all([p1, p2, p3]).then((values) => {
                 // Indicator.close()
+                this.$store.commit('shopIntro', values[0])
+                this.$store.commit('dishList', values[1])
+                this.$store.commit('setList', values[2])
                 console.log(values)
             }).catch((err) => {
                 // Indicator.close()
