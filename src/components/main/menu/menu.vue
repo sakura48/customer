@@ -4,7 +4,7 @@
             <li :class="index === 1 ? 'active' : ''" @click="index = 1">单品</li>
             <li :class="index === 2 ? 'active' : ''" @click="index = 2">套餐</li>
         </ul>
-        <div style="width:75%">
+        <div style="width:75%;height:100%;overflow: scroll;">
             <dish v-show="index === 1" :dishList="dishList"></dish>
             <set v-show="index === 2" :setList="setList"></set>
         </div>
@@ -24,33 +24,8 @@
         data() {
             return {
                 index: 1,
-                dishList: [
-                    {
-                        name: 'VUE单品',
-                        code: '000xxx1',
-                        image_urls: ['../../../assets/logo.png', '../../../assets/logo.png']
-                    },
-                    {
-                        name: 'VUE单品',
-                        code: '000xxx1',
-                        image_urls: ['../../../assets/logo.png', '../../../assets/logo.png']
-                    },
-                    {
-                        name: 'VUE单品',
-                        code: '000xxx1',
-                        image_urls: ['../../../assets/logo.png', '../../../assets/logo.png']
-                    }
-                ],
-                setList: [
-                    {
-                        id: '套餐的id',
-                        name: 'VUE套餐',
-                        code: '000xxx1',
-                        tags: ['西红柿', '鸡蛋'],
-                        dishes: ['单品1id', '单品2id'],
-                        image_urls: ['url1', 'url2']
-                    }
-                ]
+                dishList: [],
+                setList: []
             }
         },
         methods: {}

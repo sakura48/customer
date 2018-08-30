@@ -2,21 +2,26 @@
     <div class="dishDetail">
         <transition name="slidedown">
             <div class="content" v-show="showDish">
-                <img style="width:40%;display: block;margin-bottom: 10px;" src="../../assets/logo.png" alt="">
+                <div class="clearfix">
+                    <img style="width:40%;display: block;margin-bottom: 10px; float: left;" :src="getDish.image_url"
+                         alt="">
+                    <h4 style="margin-left: 15px; margin-top:30px; float:left;">{{getDish.cn_name}}</h4>
+                    <number-picker v-model="count"></number-picker>
+                </div>
+
                 <div class="intro">
                     <h4>单品介绍</h4>
-                    <div style="margin-top: 10px;font-size: 12px;">好吃又实惠</div>
+                    <div style="margin-top: 10px;font-size: 12px;">{{getDish.cn_description}}</div>
                 </div>
                 <div class="material">
                     <h4>使用材料</h4>
                     <div style="margin-top: 10px">
-                        <span>aaa</span>
-                        <span>bbb</span>
-                        <span>ccc</span>
+                        <span class="materials" v-for="item in getDish.cn_materials">{{item}}</span>
                     </div>
                 </div>
-                <div class="price">110.00</div>
-                <mt-button type="primary" size="small" @click="add($event)">加入订单</mt-button>
+                <div class="price">价格待定</div>
+                <mt-button v-if="canAdd" type="primary" size="small" @click="add($event)">加入订单</mt-button>
+                <span v-else class="added">已添加</span>
                 <div class="close" @click="close"></div>
             </div>
         </transition>
@@ -24,15 +29,17 @@
 </template>
 
 <script>
+    import numberPicker from './numberPicker'
+
     export default {
         name: 'dishDetail',
+        components: {
+            numberPicker
+        },
         data() {
             return {
                 addOne: false,
-                circle: {
-                    x: 0,
-                    y: 0
-                }
+                count: 1
             }
         },
         props: {
@@ -44,13 +51,32 @@
         computed: {
             showDish() {
                 return this.$store.state.showDish
+            },
+            getDish() {
+                return this.$store.state.currentDish
+            },
+            canAdd() {
+                let add = true
+                let list = this.$store.state.selectedDish
+                list.forEach((val) => {
+                    if (val['id'] === this.getDish['id']) {
+                        add = false
+                    }
+                })
+                return add
             }
         },
         methods: {
             add(event) {
-
+                console.log(111)
+                let dish = Object.assign(this.getDish, {
+                    count: this.count
+                })
+                console.log(dish)
+                this.$store.commit('selectedDish', dish)
             },
             close() {
+                this.count = 1
                 this.$store.commit('showDish', false)
             }
         }
@@ -58,6 +84,19 @@
 </script>
 
 <style lang="scss" scoped>
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .number-picker {
+        width: 150px;
+        margin-left: 10px;
+        margin-top: 20px;
+        float: left;
+    }
+
     .circle {
         position: fixed;
         width: 20px;
@@ -80,7 +119,7 @@
             position: relative;
             width: 80%;
             min-height: 50%;
-            padding: 0 10px;
+            padding: 10px;
             border-radius: 10px;
             background-color: white;
             .intro {
@@ -104,6 +143,16 @@
                 bottom: 20px;
                 background-color: #FFB311;
             }
+            .added {
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                width: 80px;
+                height: 33px;
+                line-height: 33px;
+                text-align: center;
+                display: inline-block;
+            }
             .close {
                 position: absolute;
                 left: 0;
@@ -116,7 +165,7 @@
                 background-size: 100% 100%;
             }
         }
-        span {
+        .materials {
             padding: 2px 6px;
             border-radius: 1000px;
             color: #a9a9a9;
