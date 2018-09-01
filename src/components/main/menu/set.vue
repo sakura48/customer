@@ -31,7 +31,7 @@
             showDetail(set) {
                 this.$store.commit('currentSet', set)
                 this.$store.commit('showSet', true)
-            },
+            }
             // loadMore() {
             //     this.loading = true
             //     setTimeout(() => {

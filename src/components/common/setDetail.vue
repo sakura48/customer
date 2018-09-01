@@ -17,7 +17,7 @@
                     <div class="material">
                         <h4>单品组成</h4>
                         <div style="margin-top: 10px">
-                            <span class="materials" v-for="item in getSet.dishes">{{item}}</span>
+                            <span class="materials" v-for="item in getSet.dishes">{{item.cn_name}}</span>
                         </div>
                     </div>
                     <div class="price">价格待定</div>
@@ -72,7 +72,7 @@
             add(event) {
                 console.log(this.getSet)
                 let set = Object.assign(this.getSet, {
-                    count: this.count
+                    count: this.count.toString()
                 })
                 this.$store.commit('selectedSet', set)
             },

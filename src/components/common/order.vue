@@ -29,6 +29,8 @@
 </template>
 
 <script>
+    import {Toast} from 'mint-ui'
+
     export default {
         name: 'order',
         data() {
@@ -60,9 +62,11 @@
                     sets: this.getSets
                 }
                 this.$ajax.post('/h5/customer/order/submit', JSON.stringify(params)).then((res) => {
+                    Toast('下单成功')
+                    this.$store.commit('clearAll')
                     this.success = true
                 }).catch((err) => {
-                    this.$message.error(err)
+                    Toast(err)
                 })
             },
             // 删除单品

@@ -68,9 +68,8 @@
         },
         methods: {
             add(event) {
-                console.log(111)
                 let dish = Object.assign(this.getDish, {
-                    count: this.count
+                    count: this.count.toString()
                 })
                 console.log(dish)
                 this.$store.commit('selectedDish', dish)
