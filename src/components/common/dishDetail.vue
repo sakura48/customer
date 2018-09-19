@@ -1,14 +1,13 @@
 <template>
     <div class="dishDetail">
         <transition name="slidedown">
-            <div class="content" v-show="showDish">
+            <div class="content" v-if="showDish">
                 <div class="clearfix">
-                    <img style="width:40%;display: block;margin-bottom: 10px; float: left;" :src="getDish.image_url"
+                    <img style="width:40%;display: block;margin-bottom: 10px; float: left;" :src="image_url"
                          alt="">
                     <h4 style="margin-left: 15px; margin-top:30px; float:left;">{{getDish.cn_name}}</h4>
                     <number-picker v-model="count"></number-picker>
                 </div>
-
                 <div class="intro">
                     <h4>单品介绍</h4>
                     <div style="margin-top: 10px;font-size: 12px;">{{getDish.cn_description}}</div>
@@ -30,9 +29,11 @@
 
 <script>
     import numberPicker from './numberPicker'
+    import {mixin} from '../../mixins/index'
 
     export default {
         name: 'dishDetail',
+        mixins: [mixin],
         components: {
             numberPicker
         },
@@ -49,6 +50,9 @@
             }
         },
         computed: {
+            image_url() {
+                return this.url + this.getDish.image_url
+            },
             showDish() {
                 return this.$store.state.showDish
             },
@@ -68,9 +72,8 @@
         },
         methods: {
             add(event) {
-                console.log(111)
                 let dish = Object.assign(this.getDish, {
-                    count: this.count
+                    count: this.count.toString()
                 })
                 console.log(dish)
                 this.$store.commit('selectedDish', dish)

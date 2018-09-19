@@ -1,13 +1,16 @@
 <template>
     <div class="header">
-        <img class="logo" :src="getShopIntro.image_url" align="center" alt="">
+        <img class="logo" :src="url+getShopIntro.image_url" align="center" alt="">
         <span class="text" style="">{{getShopIntro.cn_name}}</span>
     </div>
 </template>
 
 <script>
+    import {mixin} from '../../mixins/index'
+
     export default {
         name: 'sHeader',
+        mixins: [mixin],
         data() {
             return {}
         },

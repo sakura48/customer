@@ -25,9 +25,11 @@
     import setDetail from './components/common/setDetail'
     import order from './components/common/order'
     import {Toast, Indicator} from 'mint-ui'
+    import {mixin} from '@/mixins/index'
 
     export default {
         name: 'App',
+        mixins: [mixin],
         components: {
             sFooter,
             sHeader,
@@ -99,7 +101,7 @@
             // this.getSetList()
         },
         created() {
-
+            console.log(this.url)
         }
     }
 </script>

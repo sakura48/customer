@@ -3,7 +3,7 @@
         style="background-color: white;"
         class="setList">
         <li class="cell" v-for="item in setList" @click="showDetail(item)">
-            <img :src="item.image_url" alt="">
+            <img :src="url+item.image_url" alt="">
             <div class="content">
                 <h4>{{item.cn_name}}</h4>
                 <h6>
@@ -15,8 +15,11 @@
 </template>
 
 <script>
+    import {mixin} from '../../../mixins/index'
+
     export default {
         name: 'set',
+        mixins: [mixin],
         data() {
             return {
                 loading: false
@@ -31,7 +34,7 @@
             showDetail(set) {
                 this.$store.commit('currentSet', set)
                 this.$store.commit('showSet', true)
-            },
+            }
             // loadMore() {
             //     this.loading = true
             //     setTimeout(() => {

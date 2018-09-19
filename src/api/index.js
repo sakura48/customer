@@ -1,7 +1,9 @@
 import axios from 'axios'
-import { Indicator } from 'mint-ui'
+import {Indicator} from 'mint-ui'
 
-axios.defaults.baseURL = 'http://192.168.6.160:805'
+const protocol = window.location.protocol
+const host = window.location.host
+axios.defaults.baseURL = `${protocol}//${host}`
 const config = {
     headers: {
         'Content-type': 'application/json'
