@@ -1,9 +1,10 @@
 <template>
-    <img v-if="success" src="http://xx.com/h5/employee/qrcode?shop_id=1&seat_no=111" alt="">
-    <div v-else class="order">
+
+    <div class="order">
         <transition name="slideup">
-            <div class="content" v-show="showOrder">
-                <ul class="list">
+            <div class="content" v-if="showOrder">
+                <img v-if="success" :src="url+'/imagesviews/qr_employee.jpg'" alt="">
+                <ul v-else class="list">
                     <li v-for="item in getDishes" :key="item.id">
                         <div class="name">{{item.cn_name}}</div>
                         <div class="count">&times;{{item.count}}</div>
@@ -20,7 +21,7 @@
                     </li>
                 </ul>
                 <input type="text" v-model="seat_no" class="tableNum" placeholder="请输入桌号">
-                <mt-button class="submit" size="large" type="primary" :disabled="seat_no === ''" @click="onSubmit">确认提交
+                <mt-button class="submit" size="large" type="primary" :disabled="seat_no === ''" @click.stop="onSubmit">确认提交
                 </mt-button>
                 <div class="close" @click="close"></div>
             </div>
@@ -30,9 +31,11 @@
 
 <script>
     import {Toast} from 'mint-ui'
+    import {mixin} from '../../mixins/index'
 
     export default {
         name: 'order',
+        mixins: [mixin],
         data() {
             return {
                 success: false,

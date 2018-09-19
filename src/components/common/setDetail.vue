@@ -2,10 +2,10 @@
     <transition name="add">
         <div class="setDetail">
             <transition name="slidedown">
-                <div class="content" v-show="showSet">
+                <div class="content" v-if="showSet">
                     <div class="clearfix">
                         <img style="width:40%;display: block;margin-bottom: 10px; float: left;"
-                             :src="getSet.image_url"
+                             :src="image_url"
                              alt="">
                         <h4 style="margin-left: 15px; margin-top:30px; float:left;">{{getSet.cn_name}}</h4>
                         <number-picker v-model="count"></number-picker>
@@ -32,9 +32,11 @@
 
 <script>
     import numberPicker from './numberPicker'
+    import {mixin} from '../../mixins/index'
 
     export default {
         name: 'setDetail',
+        mixins: [mixin],
         props: {
             type: Object,
             default: function () {
@@ -50,6 +52,9 @@
             }
         },
         computed: {
+            image_url() {
+                return this.url + this.getSet.image_url
+            },
             showSet() {
                 return this.$store.state.showSet
             },

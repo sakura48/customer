@@ -3,7 +3,7 @@
         style="background-color: white;"
         class="dishList">
         <li class="cell" v-for="item in dishList" @click="showDetail(item)">
-            <img :src="item.image_url" alt="">
+            <img :src="url+item.image_url" alt="">
             <div class="content">
                 <h4>{{item.cn_name}}</h4>
                 <h6>
@@ -26,8 +26,11 @@
 </template>
 
 <script>
+    import {mixin} from '../../../mixins/index'
+
     export default {
         name: 'dish',
+        mixins: [mixin],
         data() {
             return {
                 loading: false
