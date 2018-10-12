@@ -1,113 +1,58 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-  </div>
+    <div class="index">
+        <div class="main">
+            <router-view></router-view>
+        </div>
+        <div class="tabBar">
+            <ul>
+                <router-link tag="li" to="/dish">
+                    点菜
+                </router-link>
+                <router-link tag="li" to="/order">
+                    订单
+                </router-link>
+                <router-link tag="li" to="/shop">
+                    商家
+                </router-link>
+            </ul>
+        </div>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    export default {
+        name: 'HelloWorld'
     }
-  }
-}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style lang="scss" scoped>
+    .index {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        .main {
+            width: 100%;
+            height: calc(100% - 49px);
+            background-color: green;
+        }
+        .tabBar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 49px;
+            background-color: black;
+            ul {
+                height: 100%;
+                display: flex;
+                li {
+                    font-size: 14px;
+                    text-align: center;
+                    color: white;
+                    list-style: none;
+                    height: 100%;
+                    flex: 1;
+                }
+            }
+        }
+    }
 </style>

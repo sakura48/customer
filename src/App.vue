@@ -1,107 +1,30 @@
 <template>
     <div id="app">
-        <s-header></s-header>
-        <s-main></s-main>
-        <s-footer></s-footer>
-        <!--<router-view/>-->
-        <modal :visible="showDish">
-            <dish-detail v-show="showDish"></dish-detail>
-        </modal>
-        <modal :visible="showSet">
-            <set-detail v-show="showSet"></set-detail>
-        </modal>
-        <modal :visible="showOrder">
-            <order v-show="showOrder"></order>
-        </modal>
+        <!--<div class="main">-->
+        <router-view></router-view>
+        <!--</div>-->
+        <!--<div class="tabBar">-->
+        <!--<ul>-->
+        <!--<router-link tag="li" to="/dish">-->
+        <!--点菜-->
+        <!--</router-link>-->
+        <!--<router-link tag="li" to="/order">-->
+        <!--订单-->
+        <!--</router-link>-->
+        <!--<router-link tag="li" to="/shop">-->
+        <!--商家-->
+        <!--</router-link>-->
+        <!--</ul>-->
+        <!--</div>-->
     </div>
 </template>
 
 <script>
-    import sFooter from './components/footer/sFooter'
-    import sHeader from './components/header/sHeader'
-    import sMain from './components/main/sMain'
-    import modal from './components/common/modal'
-    import dishDetail from './components/common/dishDetail'
-    import setDetail from './components/common/setDetail'
-    import order from './components/common/order'
-    import {Toast, Indicator} from 'mint-ui'
-    import {mixin} from '@/mixins/index'
 
     export default {
         name: 'App',
-        mixins: [mixin],
-        components: {
-            sFooter,
-            sHeader,
-            sMain,
-            modal,
-            dishDetail,
-            setDetail,
-            order
-        },
-        data() {
-            return {}
-        },
-        computed: {
-            showDish() {
-                return this.$store.state.showDish
-            },
-            showSet() {
-                return this.$store.state.showSet
-            },
-            showOrder() {
-                return this.$store.state.showOrder
-            }
-        },
-        methods: {
-            getShopIntro() {
-                let time = new Date().getTime().toString()
-                this.$ajax.get(`/web/shop/get?id=1&t=${time}`).then((res) => {
-                    this.$store.commit('shopIntro', res)
-                }).catch((err) => {
-                    Toast(err)
-                })
-            },
-            getDishList() {
-                let time = new Date().getTime().toString()
-                this.$ajax.get(`/web/dish/all?shop_id=1&t=${time}`).then((res) => {
-                    this.$store.commit('dishList', res)
-                }).catch((err) => {
-                    Toast(err)
-                })
-            },
-            getSetList() {
-                let time = new Date().getTime().toString()
-                this.$ajax.get(`/web/set/all?shop_id=1&t=${time}`).then((res) => {
-                    this.$store.commit('setList', res)
-                }).catch((err) => {
-                    Toast(err)
-                })
-            }
-        },
         mounted() {
-            let time = new Date().getTime().toString()
-            let p1 = this.$ajax.get(`/web/shop/get?id=1&t=${time}`)
-            let p2 = this.$ajax.get(`/web/dish/all?shop_id=1&t=${time}`)
-            let p3 = this.$ajax.get(`/web/set/all?shop_id=1&t=${time}`)
-            console.log(Indicator)
-            Indicator.open()
-            Promise.all([p1, p2, p3]).then((values) => {
-                // Indicator.close()
-                this.$store.commit('shopIntro', values[0])
-                this.$store.commit('dishList', values[1])
-                this.$store.commit('setList', values[2])
-                console.log(values)
-            }).catch((err) => {
-                // Indicator.close()
-                Toast(err)
-            })
-            // this.getShopIntro()
-            // this.getDishList()
-            // this.getSetList()
-        },
-        created() {
-            console.log(this.url)
+            document.documentElement.style.fontSize = document.documentElement.clientWidth / 32 + 'px'
         }
     }
 </script>
@@ -113,5 +36,8 @@
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+    li{
+        list-style: none;
     }
 </style>

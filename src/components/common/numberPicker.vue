@@ -11,7 +11,7 @@
         name: 'numberPicker',
         props: {
             value: {
-                default: ''
+                default: '1'
             }
         },
 
@@ -32,7 +32,7 @@
 <style lang="scss" scoped>
     .number-picker {
         text-align: center;
-        line-height: 30px;
+        line-height: 3rem;
         .minus {
             float: left;
         }
@@ -41,14 +41,17 @@
             background-color: #FFB311;
         }
         .minus, .plus {
-            width: 30px;
-            height: 30px;
+            width: 3rem;
+            height: 3rem;
             font-size: 18px;
             font-weight: bold;
-            line-height: 30px;
+            line-height: 3rem;
             text-align: center;
             border-radius: 50%;
             border: 1px solid #dcdcdc;
+        }
+        .number{
+            font-size: 12px;
         }
     }
 
