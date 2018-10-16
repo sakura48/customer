@@ -1,7 +1,7 @@
 <template>
     <div class="index">
         <div class="main">
-            <router-view></router-view>
+                <router-view></router-view>
         </div>
         <div class="tabBar">
             <ul>
@@ -33,7 +33,6 @@
         .main {
             width: 100%;
             height: calc(100% - 49px);
-            background-color: green;
         }
         .tabBar {
             position: absolute;

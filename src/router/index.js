@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Dish from '@/components/dish/dish'
+import DishDetail from '@/components/dish/DishDetail'
 
 Vue.use(Router)
 
@@ -14,7 +15,8 @@ export default new Router({
             children: [
                 {
                     path: '/dish',
-                    component: Dish
+                    component: Dish,
+                    meta: {index: 0}
                 },
                 {
                     path: '/order',
@@ -25,6 +27,11 @@ export default new Router({
                     component: HelloWorld
                 }
             ]
+        },
+        {
+            path: '/dishDetail',
+            component: DishDetail,
+            meta: {index: 1}
         }
     ]
 })

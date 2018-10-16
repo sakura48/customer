@@ -3,24 +3,37 @@
         <mt-header title="点菜" style="font-size: 20px;height:4rem;"></mt-header>
         <div class="banner">
             <ul :style="{width: bannerWidth}">
-                <li v-for="(key,value) in list" :key="key">{{value}}</li>
+                <li v-for="item in list" :key="item.id">
+                    <div class="item" style="">
+                        <img :src="banner" alt="">
+                        <h3>
+                            <span>{{item.name}}</span>
+                            <span>￥110</span>
+                        </h3>
+                    </div>
+                </li>
             </ul>
         </div>
         <div class="menu">
             <div class="menu-left">
                 <ul>
-                    <li>本店特色</li>
+                    <li class="active" v-tap="vuetouch" v-longtap="{fn:vuetouch,list}">本店特色</li>
                     <li>套餐</li>
                     <li>主食</li>
                     <li>甜品</li>
                 </ul>
             </div>
             <div class="menu-right">
-                <div class="item" v-for="(key,value) in list" :key="key">
+                <div class="item" v-for="item in list" :key="item.id" v-tap="{fn:detail,item}">
                     <img :src="imgurl" alt="">
                     <div class="intro">
                         <h2>大饼鸡蛋</h2>
-                        <number-picker></number-picker>
+                        <div class="comment">{{item.id}}敖德萨多大多啥的方法撒发生法萨芬撒反</div>
+                        <div style="width:100%;padding-top: 0.5rem;">
+                            <span class="price">￥110</span>
+                            <number-picker style="width:60%;float:right;" v-model="item.num"></number-picker>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -40,13 +53,44 @@
         },
         data() {
             return {
+                num: 0,
+                banner: require('../../assets/banner.jpg'),
                 imgurl: require('../../assets/logo.png'),
-                list: [1, 2, 3, 4, 5, 6, 7, 8]
+                list: [
+                    {
+                        id: 1,
+                        num: 0,
+                        name: '大饼鸡蛋'
+                    },
+                    {
+                        id: 2,
+                        num: 0,
+                        name: '大饼鸡蛋'
+                    }, {
+                        id: 3,
+                        num: 0,
+                        name: '大饼鸡蛋'
+                    },
+                    {
+                        id: 4,
+                        num: 0,
+                        name: '大饼鸡蛋'
+                    }
+                ]
             }
         },
         computed: {
             bannerWidth() {
                 return this.list.length * 20 + 'rem'
+            }
+        },
+        methods: {
+            vuetouch(s, e) {
+                console.log(s)
+                console.log(e)
+            },
+            detail(s, e) {
+                this.$router.push({path: 'DishDetail', query: s.item['id']})
             }
         }
     }
@@ -56,37 +100,70 @@
     .dish {
         width: 100%;
         height: 100%;
-        background-color: orange;
         .mint-header {
             width: 100%;
         }
         .banner {
             width: 100%;
-            padding: 1.5rem 0;
-            background-color: green;
+            padding: 0.5rem 0;
             overflow-x: scroll;
             ul {
                 height: 14rem;
                 li {
                     width: 18rem;
                     height: 12rem;
-                    background-color: blue;
                     padding: 1rem;
                     float: left;
+                    .item {
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 0.5rem;
+                        box-shadow: 0 3px 3px #dcdcdc;
+                        overflow: hidden;
+                        img {
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                        }
+                        h3 {
+                            position: absolute;
+                            bottom: 0;
+                            width: 100%;
+                            height: 3rem;
+                            line-height: 3rem;
+                            font-size: 12px;
+                            background-color: rgba(255, 255, 255, 0.9);
+                            span:nth-of-type(1) {
+                                margin-left: 1rem;
+                                float: left;
+                            }
+                            span:nth-of-type(2) {
+                                color: red;
+                                margin-right: 1rem;
+                                float: right;
+                            }
+                        }
+                    }
                 }
             }
         }
         .menu {
-            height: calc(100% - 21rem);
+            height: calc(100% - 19rem);
+            border-top: 1px solid #ececec;
             display: flex;
             .menu-left {
                 width: 7.5rem;
                 height: 100%;
+                background-color: #efefef;
                 ul {
                     li {
                         padding: 1.4rem 0;
                         font-size: 12px;
                         text-align: center;
+                    }
+                    li.active {
+                        background-color: white;
                     }
                 }
             }
@@ -95,23 +172,38 @@
                 height: 100%;
                 overflow-y: scroll;
                 .item {
-                    width: 20.5rem;
+                    width: 22.5rem;
                     height: 10rem;
-                    margin: 1.5rem auto;
-                    background-color: red;
+                    margin: 1rem auto;
                     display: flex;
                     img {
                         width: 9rem;
                     }
                     .intro {
-                        width: 11rem;
+                        width: 13rem;
                         padding-left: 0.5rem;
                         flex-direction: column;
                         align-items: center;
                         display: flex;
                         h2 {
                             width: 100%;
-                            margin: auto;
+                            margin: 0.5rem auto;
+                        }
+                        .comment {
+                            width: 100%;
+                            line-height: 1.5;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                            overflow: hidden
+                        }
+                        .price {
+                            padding: 0.3rem 0.5rem;
+                            color: red;
+                            font-size: 14px;
+                            font-weight: bold;
+                            display: inline-block;
+                            float: left;
                         }
                         .number-picker {
                             width: 100%;
