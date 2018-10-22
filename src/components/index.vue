@@ -42,7 +42,7 @@
             bottom: 0;
             width: 100%;
             height: 4.9rem;
-            box-shadow: 0 2px 15px #cdcdcd;
+            box-shadow: 0 2px 15px #efefef;
             ul {
                 height: 100%;
                 display: flex;
