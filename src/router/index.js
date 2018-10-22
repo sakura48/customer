@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Index from '@/components/index'
 import Dish from '@/components/dish/dish'
 import DishDetail from '@/components/dish/dishDetail'
 import Order from '@/components/order/order'
@@ -13,8 +13,8 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'HelloWorld',
-            component: HelloWorld,
+            name: 'index',
+            component: Index,
             redirect: '/dish',
             children: [
                 {
