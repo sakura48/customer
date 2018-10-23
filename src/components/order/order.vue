@@ -9,7 +9,7 @@
                 </tr>
                 <tr>
                     <td>
-                        大饼鸡蛋
+                        大饼鸡蛋1
                     </td>
                     <td>
                         <number-picker></number-picker>
