@@ -31,7 +31,8 @@
                         <div class="comment">{{item.id}}敖德萨多大多啥的方法撒发生法萨芬撒反</div>
                         <div style="width:100%;padding-top: 0.5rem;">
                             <span class="price">￥110</span>
-                            <number-picker style="width:60%;float:right;" v-model="item.num"></number-picker>
+                            <div class="add" v-if="item.num === 0" v-tap="{fn:addOne,item}">加入订单</div>
+                            <number-picker v-else style="width:60%;float:right;" v-model="item.num"></number-picker>
                         </div>
 
                     </div>
@@ -85,12 +86,15 @@
             }
         },
         methods: {
-            vuetouch(s, e) {
-                console.log(s)
-                console.log(e)
+            vuetouch(params, event) {
+
             },
-            detail(s, e) {
-                this.$router.push({path: 'DishDetail', query: s.item['id']})
+            addOne(params, event) {
+                event.stopPropagation()
+                params.item.num = 1
+            },
+            detail(params, event) {
+                this.$router.push({path: 'DishDetail', query: {id: params.item['id']}})
             }
         }
     }
@@ -204,6 +208,12 @@
                             font-weight: bold;
                             display: inline-block;
                             float: left;
+                        }
+                        .add {
+                            padding: 0.3rem 1rem;
+                            border-radius: 1000px;
+                            background-color: #FFB311;
+                            float: right;
                         }
                         .number-picker {
                             width: 100%;

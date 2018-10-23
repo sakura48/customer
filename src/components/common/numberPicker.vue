@@ -1,13 +1,8 @@
 <template>
     <div class="number-picker">
-        <div v-if="num === 0">
-            <div class="add" v-tap="addOne">加入订单</div>
-        </div>
-        <div v-else>
-            <div class="minus" v-tap="minus">-</div>
-            <span class="number">{{num}}</span>
-            <div class="plus" v-tap="plus">+</div>
-        </div>
+        <div class="minus" v-tap="minus">-</div>
+        <span class="number">{{num}}</span>
+        <div class="plus" v-tap="plus">+</div>
     </div>
 </template>
 
@@ -25,10 +20,6 @@
             }
         },
         methods: {
-            addOne(s, e) {
-                e.stopPropagation()
-                this.$emit('input', 1)
-            },
             minus(s, e) {
                 e.stopPropagation()
                 if (this.num > 0) {
@@ -48,12 +39,6 @@
     .number-picker {
         text-align: center;
         line-height: 2rem;
-        .add {
-            padding: 0.3rem 1rem;
-            border-radius: 1000px;
-            background-color: #FFB311;
-            float: right;
-        }
         .minus {
             float: left;
         }

@@ -27,6 +27,9 @@
             add(s, e) {
 
             }
+        },
+        mounted() {
+            console.log(this.$route)
         }
     }
 </script>
@@ -47,10 +50,10 @@
                 border-radius: 0.4rem;
                 display: block;
             }
-            h1{
+            h1 {
                 margin: 1rem 0;
             }
-            .detail{
+            .detail {
                 color: #888888;
                 font-size: 12px;
             }
