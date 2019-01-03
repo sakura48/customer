@@ -3,7 +3,7 @@ import {Indicator} from 'mint-ui'
 
 const protocol = window.location.protocol
 const host = window.location.host
-axios.defaults.baseURL = `${protocol}//${host}`
+axios.defaults.baseURL = `http://localhost:3000`
 const config = {
     headers: {
         'Content-type': 'application/json'

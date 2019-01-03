@@ -1,6 +1,7 @@
 <template>
     <div class="shopIntro">
-        <mt-header title="商家" style="font-size: 20px;height:4rem;"></mt-header>
+        <mt-header title="商家" style="font-size: 20px;height:4rem;"
+                   :style="{backgroundColor:$store.state.themeColor}"></mt-header>
         <div class="main">
             <img class="banner" src="../../assets/timg.jpg" alt="">
             <div class="detail">

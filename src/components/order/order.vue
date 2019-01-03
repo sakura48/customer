@@ -1,6 +1,6 @@
 <template>
     <div class="order">
-        <mt-header title="订单" style="font-size: 20px;height:4rem;"></mt-header>
+        <mt-header title="订单" style="font-size: 20px;height:4rem;" :style="{backgroundColor:$store.state.themeColor}"></mt-header>
         <div class="main">
             <table class="table">
                 <tr>

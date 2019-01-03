@@ -28,6 +28,11 @@
         },
         mounted() {
             document.documentElement.style.fontSize = document.documentElement.clientWidth / 32 + 'px'
+            window.addEventListener('message', (messageEvent) => {
+                var data = messageEvent.data // messageEvent: {source, currentTarget, data}
+                this.$store.commit('setThemeColor', data.color)
+                console.info('message from child:', data)
+            }, false)
         }
     }
 </script>
@@ -40,9 +45,11 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
-    li{
+
+    li {
         list-style: none;
     }
+
     .slide-right-enter-active,
     .slide-right-leave-active,
     .slide-left-enter-active,

@@ -14,7 +14,8 @@ export default new Vuex.Store({
         currentDish: {},
         currentSet: {},
         selectedDish: [],
-        selectedSet: []
+        selectedSet: [],
+        themeColor: 'red'
     },
     mutations: {
         showDish(state, message) {
@@ -56,6 +57,9 @@ export default new Vuex.Store({
         clearAll(state) {
             state.selectedDish = []
             state.selectedSet = []
+        },
+        setThemeColor(state, message) {
+            state.themeColor = message
         }
     }
 })

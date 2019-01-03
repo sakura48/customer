@@ -1,6 +1,6 @@
 <template>
     <div class="dishDetail">
-        <mt-header title="菜品详情" style="font-size: 20px;height:4rem;">
+        <mt-header title="菜品详情" style="font-size: 20px;height:4rem;" :style="{backgroundColor:$store.state.themeColor}">
             <router-link to="/dish" slot="left">
                 <mt-button icon="back"></mt-button>
             </router-link>

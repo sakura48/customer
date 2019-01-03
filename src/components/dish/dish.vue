@@ -1,6 +1,6 @@
 <template>
     <div class="dish">
-        <mt-header title="点菜" style="font-size: 20px;height:4rem;"></mt-header>
+        <mt-header title="点菜" style="font-size: 20px;height:4rem;" :style="{backgroundColor:$store.state.themeColor}"></mt-header>
         <div class="banner">
             <ul :style="{width: bannerWidth}">
                 <li v-for="item in list" :key="item.id">
@@ -62,20 +62,6 @@
                         id: 1,
                         num: 0,
                         name: '大饼鸡蛋'
-                    },
-                    {
-                        id: 2,
-                        num: 0,
-                        name: '大饼鸡蛋'
-                    }, {
-                        id: 3,
-                        num: 0,
-                        name: '大饼鸡蛋'
-                    },
-                    {
-                        id: 4,
-                        num: 0,
-                        name: '大饼鸡蛋'
                     }
                 ]
             }
@@ -110,7 +96,7 @@
         .banner {
             width: 100%;
             padding: 0.5rem 0;
-            overflow-x: scroll;
+            /*overflow-x: scroll;*/
             ul {
                 height: 14rem;
                 li {
