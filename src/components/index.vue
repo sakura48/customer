@@ -24,7 +24,18 @@
 
 <script>
     export default {
-        name: 'HelloWorld'
+        name: 'HelloWorld',
+        data() {
+            return {}
+        },
+        mounted() {
+            // let params = {
+            //     a: 213
+            // }
+            // this.$ajax.post('/user/post', params).then((res) => {
+            //     console.log(res)
+            // })
+        }
     }
 </script>
 

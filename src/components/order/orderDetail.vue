@@ -1,6 +1,6 @@
 <template>
     <div class="orderDetail">
-        <mt-header title="订单详情" style="font-size: 20px;height:4rem;">
+        <mt-header title="订单详情" style="font-size: 20px;height:4rem;" :style="{backgroundColor:$store.state.themeColor}">
             <router-link to="/order" slot="left">
                 <mt-button icon="back"></mt-button>
             </router-link>

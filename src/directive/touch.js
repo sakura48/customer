@@ -7,7 +7,7 @@ export default class VueTouch {
         this.vueMoves = true
         this.vueLeave = true
         this.longTouch = true
-        this.vueCallBack = typeof binding.value === 'object' ? binding.value.fn : binding.value;
+        this.vueCallBack = typeof binding.value === 'object' ? binding.value.fn : binding.value
         this.obj.addEventListener('touchstart', (e) => {
             this.start(e)
         }, false)
