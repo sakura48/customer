@@ -1,6 +1,7 @@
 <template>
     <div class="dish">
-        <mt-header title="点菜" style="font-size: 20px;height:4rem;" :style="{backgroundColor:$store.state.themeColor}"></mt-header>
+        <mt-header title="点菜" style="font-size: 20px;height:4rem;"
+                   :style="{backgroundColor:$store.state.themeColor}"></mt-header>
         <div class="banner">
             <ul :style="{width: bannerWidth}">
                 <li v-for="item in list" :key="item.id">
@@ -17,24 +18,23 @@
         <div class="menu">
             <div class="menu-left">
                 <ul>
-                    <li class="active" v-tap="vuetouch" v-longtap="{fn:vuetouch,list}">本店特色</li>
-                    <li>套餐</li>
-                    <li>主食</li>
-                    <li>甜品</li>
+                    <li :class="index === key ? 'active':''" v-for="(item,key) in dishList" :key="key"
+                        v-tap="{fn:vuetouch,item,index:key}">
+                        {{item.category_name}}
+                    </li>
                 </ul>
             </div>
             <div class="menu-right">
-                <div class="item" v-for="item in list" :key="item.id" v-tap="{fn:detail,item}">
-                    <img :src="imgurl" alt="">
+                <div class="item" v-for="item in currentDishList" :key="item.id" v-tap="{fn:detail,item}">
+                    <img :src="item.image_url" alt="">
                     <div class="intro">
-                        <h2>大饼鸡蛋</h2>
+                        <h2>{{item.dish_name}}</h2>
                         <div class="comment">{{item.id}}敖德萨多大多啥的方法撒发生法萨芬撒反</div>
                         <div style="width:100%;padding-top: 0.5rem;">
                             <span class="price">￥110</span>
                             <div class="add" v-if="item.num === 0" v-tap="{fn:addOne,item}">加入订单</div>
                             <number-picker v-else style="width:60%;float:right;" v-model="item.num"></number-picker>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -54,6 +54,7 @@
         },
         data() {
             return {
+                index: 0,
                 num: 0,
                 banner: require('../../assets/banner.jpg'),
                 imgurl: require('../../assets/logo.png'),
@@ -69,19 +70,32 @@
         computed: {
             bannerWidth() {
                 return this.list.length * 20 + 'rem'
+            },
+            carouselList() {
+                return this.$store.state.dishList['carousel_image_urls']
+            },
+            dishList() {
+                return this.$store.state.dishList['categories']
+            },
+            currentDishList() {
+                return this.dishList[this.index]['detail']
             }
         },
         methods: {
             vuetouch(params, event) {
-
+                console.log(params, event)
+                this.index = params['index']
             },
             addOne(params, event) {
                 event.stopPropagation()
                 params.item.num = 1
             },
             detail(params, event) {
-                this.$router.push({path: 'DishDetail', query: {id: params.item['id']}})
+                this.$router.push({ path: 'DishDetail', query: { id: params.item['id'] } })
             }
+        },
+        mounted() {
+            console.log(this.dishList)
         }
     }
 </script>

@@ -26,13 +26,27 @@
                 }
             }
         },
+        methods: {
+            getAbout() {
+                this.$ajax.get('/mobile/about?company_code=xxxx').then((res) => {
+                    this.$store.commit('setAbout', res)
+                })
+            },
+            getDishList() {
+                this.$ajax.get('/dish/list?company_code=xxxx').then((res) => {
+                    this.$store.commit('setDishList', res)
+                })
+            }
+        },
         mounted() {
             document.documentElement.style.fontSize = document.documentElement.clientWidth / 32 + 'px'
-            window.addEventListener('message', (messageEvent) => {
-                var data = messageEvent.data // messageEvent: {source, currentTarget, data}
-                this.$store.commit('setThemeColor', data.color)
-                console.info('message from child:', data)
-            }, false)
+            this.getAbout()
+            this.getDishList()
+            // window.addEventListener('message', (messageEvent) => {
+            //     var data = messageEvent.data // messageEvent: {source, currentTarget, data}
+            //     this.$store.commit('setThemeColor', data.color)
+            //     console.info('message from child:', data)
+            // }, false)
         }
     }
 </script>
