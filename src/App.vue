@@ -28,12 +28,12 @@
         },
         methods: {
             getAbout() {
-                this.$ajax.get('/mobile/about?company_code=xxxx').then((res) => {
+                this.$ajax.get('/mobile/about?company_id=xxxx').then((res) => {
                     this.$store.commit('setAbout', res)
                 })
             },
             getDishList() {
-                this.$ajax.get('/dish/list?company_code=xxxx').then((res) => {
+                this.$ajax.get('/dish/list?company_id=xxxx').then((res) => {
                     this.$store.commit('setDishList', res)
                 })
             }

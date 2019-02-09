@@ -4,13 +4,13 @@
                    :style="{backgroundColor:$store.state.themeColor}"></mt-header>
         <div class="banner">
             <ul :style="{width: bannerWidth}">
-                <li v-for="item in list" :key="item.id">
+                <li v-for="(item,key) in carouselList" :key="key">
                     <div class="item" style="">
-                        <img :src="banner" alt="">
-                        <h3>
-                            <span>{{item.name}}</span>
-                            <span>￥110</span>
-                        </h3>
+                        <img :src="item" alt="">
+                        <!--<h3>-->
+                            <!--<span>{{item.name}}</span>-->
+                            <!--<span>￥110</span>-->
+                        <!--</h3>-->
                     </div>
                 </li>
             </ul>
@@ -29,11 +29,11 @@
                     <img :src="item.image_url" alt="">
                     <div class="intro">
                         <h2>{{item.dish_name}}</h2>
-                        <div class="comment">{{item.id}}敖德萨多大多啥的方法撒发生法萨芬撒反</div>
+                        <div class="comment">{{item.description}}</div>
                         <div style="width:100%;padding-top: 0.5rem;">
                             <span class="price">￥110</span>
-                            <div class="add" v-if="item.num === 0" v-tap="{fn:addOne,item}">加入订单</div>
-                            <number-picker v-else style="width:60%;float:right;" v-model="item.num"></number-picker>
+                            <!--<div class="add" v-if="item.num === 0" v-tap="{fn:addOne,item}">加入订单</div>-->
+                            <!--<number-picker v-else style="width:60%;float:right;" v-model="item.num"></number-picker>-->
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
         },
         computed: {
             bannerWidth() {
-                return this.list.length * 20 + 'rem'
+                return this.carouselList.length * 20 + 'rem'
             },
             carouselList() {
                 return this.$store.state.dishList['carousel_image_urls']
@@ -110,7 +110,7 @@
         .banner {
             width: 100%;
             padding: 0.5rem 0;
-            /*overflow-x: scroll;*/
+            overflow-x: scroll;
             ul {
                 height: 14rem;
                 li {

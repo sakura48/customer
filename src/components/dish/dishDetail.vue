@@ -6,11 +6,12 @@
             </router-link>
         </mt-header>
         <div class="main">
-            <img :src="imgurl" alt="">
-            <h1>大饼鸡蛋</h1>
-            <div class="detail">热污染翁热污染无无若无dadadadaddaddas若无若翁无若无若无若</div>
+            <img :src="dish.image_url" alt="">
+            <h1>{{dish.name}}</h1>
+            <div class="detail">{{dish.description}}</div>
+            <p style="color:red">￥{{dish.price}}</p>
         </div>
-        <div class="add" v-tap="add">添加到订单</div>
+        <!--<div class="add" v-tap="add">添加到订单</div>-->
     </div>
 </template>
 
@@ -19,17 +20,20 @@
         name: 'dishDetail',
         data() {
             return {
+                dish: {},
                 imgurl: require('../../assets/banner.jpg')
             }
         },
         methods: {
             // 添加到订单
-            add(s, e) {
-
+            search(id) {
+                this.$ajax.get(`/mobile/dish/detail?dish_id=${id}`).then((res) => {
+                    this.dish = res
+                })
             }
         },
         mounted() {
-            console.log(this.$route)
+            this.search(this.$route.query.id)
         }
     }
 </script>

@@ -27,6 +27,7 @@ export default new Vuex.Store({
                             'image_url': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549106313768&di=ff32292b9f5a5de70695da775de3d735&imgtype=0&src=http%3A%2F%2Fpic161.nipic.com%2Ffile%2F20180419%2F10673188_115808836000_2.jpg',
                             'dish_name': '寿司',
                             'price': '110',
+                            'description': '321131312',
                             'id': '1'
                         }
                     ]
@@ -104,7 +105,7 @@ export default new Vuex.Store({
         }
         ,
         setDishList(state, message) {
-
+            state.dishList = message
         }
         ,
         setThemeColor(state, message) {

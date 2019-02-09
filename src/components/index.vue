@@ -9,10 +9,10 @@
                     <div class="icon icon_dish"></div>
                     <span>点菜</span>
                 </router-link>
-                <router-link tag="li" to="/order">
-                    <div class="icon icon_order"></div>
-                    <span>订单</span>
-                </router-link>
+                <!--<router-link tag="li" to="/order">-->
+                <!--<div class="icon icon_order"></div>-->
+                <!--<span>订单</span>-->
+                <!--</router-link>-->
                 <router-link tag="li" to="/shop">
                     <div class="icon icon_shop"></div>
                     <span>商家</span>

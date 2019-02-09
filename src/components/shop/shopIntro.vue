@@ -3,11 +3,11 @@
         <mt-header title="商家" style="font-size: 20px;height:4rem;"
                    :style="{backgroundColor:$store.state.themeColor}"></mt-header>
         <div class="main">
-            <img class="banner" src="../../assets/timg.jpg" alt="">
+            <img class="banner" :src="getShopIntro.image_url" alt="">
             <div class="detail">
-                <h2>商家详情</h2>
+                <h2>{{getShopIntro.name}}</h2>
                 <div style="font-size: 12px;color:#888888;">
-                    啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+                    {{getShopIntro.description}}
                 </div>
             </div>
         </div>
@@ -16,7 +16,12 @@
 
 <script>
     export default {
-        name: 'shopIntro'
+        name: 'shopIntro',
+        computed: {
+            getShopIntro() {
+                return this.$store.state.about
+            }
+        }
     }
 </script>
 
